@@ -5,6 +5,7 @@ import tw from 'twin.macro';
 import { AsyncBoundary } from './hocs/hoc-error-boundary';
 
 const MainPage = lazy(() => import('./pages/main'));
+const UploadPage = lazy(() => import('./pages/upload'));
 
 const RouteWrapper = tw.main`relative w-full h-full`;
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
           <RouteWrapper>
             <Routes>
               <Route path="/" element={<MainPage />} />
+              <Route path="/upload" element={<UploadPage />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </RouteWrapper>

@@ -9,14 +9,15 @@ import { Menu } from '~/types/index';
 
 import { Dropdown } from './dropdown/dropdown';
 
-interface Props {
-  menus: Menu[];
-}
-
-export const Gnb = ({ menus }: Props) => {
+export const Gnb = () => {
   const navigate = useNavigate();
   const { open, close } = usePopup(POPUP_ID.CONNECT);
   const { wallet, reset } = useWalletStore();
+
+  const menus: Menu[] = [
+    { name: 'Hooks', path: '/', isVisible: true },
+    { name: 'Upload Hook', path: '/upload', isVisible: !!wallet?.classicAddress },
+  ];
 
   const disconnect = () => {
     reset();
@@ -31,6 +32,7 @@ export const Gnb = ({ menus }: Props) => {
       </LogoWrapper>
       <MenuWrapper>
         {menus.map(menu => {
+          if (!menu.isVisible) return;
           return (
             <MenuButton key={menu.name} onClick={() => navigate(menu.path)}>
               {menu.name}
