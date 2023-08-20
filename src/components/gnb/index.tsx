@@ -4,6 +4,7 @@ import tw from 'twin.macro';
 import logo from '~/assets/images/logo.png';
 import { POPUP_ID } from '~/constants';
 import { usePopup } from '~/hooks/pages/use-popup';
+import { useWalletStore } from '~/states/wallet-info';
 import { Menu } from '~/types/index';
 
 import { Dropdown } from './dropdown/dropdown';
@@ -14,13 +15,14 @@ interface Props {
 
 export const Gnb = ({ menus }: Props) => {
   const navigate = useNavigate();
-  const { open } = usePopup(POPUP_ID.CONNECT);
+  const { open, close } = usePopup(POPUP_ID.CONNECT);
+  const { wallet, reset } = useWalletStore();
 
-  // TODO : get address by seed
-  const address = 'ra2ev63Q2sKKUNZB95NgFW165QUKGiXCqr';
-
-  // TODO : remove address
-  const disconnect = () => console.log('disconnect !');
+  const disconnect = () => {
+    reset();
+    close();
+    navigate('/');
+  };
 
   return (
     <Wrapper>
@@ -35,7 +37,7 @@ export const Gnb = ({ menus }: Props) => {
             </MenuButton>
           );
         })}
-        <Dropdown address={address} disconnect={disconnect} connect={open} />
+        <Dropdown address={wallet?.classicAddress} disconnect={disconnect} connect={open} />
       </MenuWrapper>
     </Wrapper>
   );

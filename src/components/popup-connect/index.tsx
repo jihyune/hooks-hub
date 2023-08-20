@@ -1,10 +1,12 @@
 import { useRef, useState } from 'react';
 import tw from 'twin.macro';
 import { useOnClickOutside } from 'usehooks-ts';
+import { Wallet } from 'xrpl';
 
 import { COLOR } from '~/assets/colors';
 import { POPUP_ID } from '~/constants';
 import { usePopup } from '~/hooks/pages/use-popup';
+import { useWalletStore } from '~/states/wallet-info';
 
 import { ButtonIcon } from '../buttons/button-icon';
 import { ButtonMedium } from '../buttons/button-medium';
@@ -14,35 +16,19 @@ import { TextField } from '../textfield';
 export const ConnectPopup = () => {
   const popupRef = useRef<HTMLDivElement>(null);
   const { close } = usePopup(POPUP_ID.CONNECT);
+  const { setWallet } = useWalletStore();
   useOnClickOutside(popupRef, close);
 
-  // const { setWallet, setBalance } = useWalletStore();
   const [connectingLoading, setConnectingLoading] = useState<boolean>();
   const [seed, setSeed] = useState<string>();
 
-  // TODO : xrp setting
-  const connect = async () => {
+  const connectWallet = async () => {
+    if (!seed) return;
     setConnectingLoading(true);
-
-    // const client = new Client(NET);
-    // await client.connect();
-    // return { client };
+    const wallet = Wallet.fromSeed(seed);
+    setWallet(wallet);
+    close();
   };
-
-  // const getWalletInfo = async (client: Client, wallet: Wallet) => {
-  //   const balance = await client.getXrpBalance(wallet.address);
-  //   setWallet(wallet);
-  //   setBalance(balance.toString());
-  //   client.disconnect();
-  //   close();
-  // };
-
-  // const connectWallet = async () => {
-  //   if (!seed) return;
-  //   const { client } = await connect('connect');
-  //   const wallet = Wallet.fromSeed(seed);
-  //   await getWalletInfo(client, wallet);
-  // };
 
   return (
     <Wrapper>
@@ -60,7 +46,7 @@ export const ConnectPopup = () => {
         <ButtonWrapper>
           <ButtonMedium
             text="Connect"
-            onClick={connect}
+            onClick={connectWallet}
             isLoading={connectingLoading}
             disabled={!seed}
           />
