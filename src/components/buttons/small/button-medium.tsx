@@ -7,8 +7,9 @@ import loading from '~/assets/lottie/loading-dot.json';
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   isLoading?: boolean;
+  disabled?: boolean;
 }
-export const ButtonSmall = ({ text, isLoading, ...rest }: Props) => {
+export const ButtonMedium = ({ text, isLoading, disabled, ...rest }: Props) => {
   const warpperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -27,7 +28,7 @@ export const ButtonSmall = ({ text, isLoading, ...rest }: Props) => {
   }, [warpperRef, isLoading]);
 
   return (
-    <Wrapper isLoading={isLoading} {...rest}>
+    <Wrapper isLoading={isLoading} disabled={isLoading || disabled} {...rest}>
       <TextWrapper isLoading={isLoading}>{text}</TextWrapper>
       <LottieWrapper ref={warpperRef} />
     </Wrapper>
@@ -39,21 +40,16 @@ interface LoadingProps {
 }
 const Wrapper = styled.button<LoadingProps>(({ isLoading }) => [
   tw`
-    h-32 px-16 py-6 flex-center relative
-    rounded-8 bg-gray4 clickable
-    hover:(bg-gray3)
-    disabled:(bg-gray2 non-clickable hover:(bg-gray2))
+    h-42 px-24 py-10 flex-center relative text-white font-b-14
+    rounded-8 bg-purple1 clickable
+    hover:(bg-purple2)
+    disabled:(bg-gray3 non-clickable hover:(bg-gray3) text-gray2)
   `,
-  isLoading && tw`text-transparent non-clickable`,
+  isLoading &&
+    tw`text-transparent non-clickable bg-purple2 disabled:(bg-purple2 hover:(bg-purple2))`,
 ]);
 
-const TextWrapper = styled.div<LoadingProps>(({ isLoading }) => [
-  tw`
-    font-sb-12 text-white
-    disabled:(text-gray5)
-  `,
-  isLoading && tw`opacity-0`,
-]);
+const TextWrapper = styled.div<LoadingProps>(({ isLoading }) => [isLoading && tw`opacity-0`]);
 const LottieWrapper = tw.div`
   w-full h-full flex-center absolute absolute-center
 `;
