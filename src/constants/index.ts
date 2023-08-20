@@ -71,3 +71,8 @@ export const BREAKPOINT = {
  * @description FORMAT NUMBER 를 진행할때 UNIT(K,M,B,T) 를 붙이는 기준
  */
 export const FORMAT_NUMBER_THRESHOLD = 10000000;
+
+export const POPUP_ID = {
+  CONNECT: 'connect',
+};
+export const NET = 'wss://s.altnet.rippletest.net:51233';

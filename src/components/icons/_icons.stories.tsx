@@ -17,7 +17,7 @@ type Story = StoryObj<typeof meta>;
 export const _Icons: Story = {
   render: () => (
     <IconWrapper>
-      <IconSvg.IconSample />
+      <IconSvg.IconCancle />
     </IconWrapper>
   ),
 };

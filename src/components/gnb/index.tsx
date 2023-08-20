@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import tw from 'twin.macro';
 
 import logo from '~/assets/images/logo.png';
+import { POPUP_ID } from '~/constants';
+import { usePopup } from '~/hooks/pages/use-popup';
 import { Menu } from '~/types/index';
 
 import { Dropdown } from './dropdown/dropdown';
@@ -12,6 +14,8 @@ interface Props {
 
 export const Gnb = ({ menus }: Props) => {
   const navigate = useNavigate();
+  const { open } = usePopup(POPUP_ID.CONNECT);
+
   // TODO : get address by seed
   const address = 'ra2ev63Q2sKKUNZB95NgFW165QUKGiXCqr';
 
@@ -31,7 +35,7 @@ export const Gnb = ({ menus }: Props) => {
             </MenuButton>
           );
         })}
-        <Dropdown address={address} disconnect={disconnect} />
+        <Dropdown address={address} disconnect={disconnect} connect={open} />
       </MenuWrapper>
     </Wrapper>
   );
