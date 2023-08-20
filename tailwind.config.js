@@ -33,12 +33,13 @@ module.exports = {
         black: '#000000',
         white: '#ffffff',
 
-        purple3:'#847794'
-        purple2:'#6F5A7E'
-        purple1:'#4A2961'
+        purple3: '#847794',
+        purple2: '#6F5A7E',
+        purple1: '#4A2961',
 
-        gray2: '#333D4B',
-        gray1: '#EAECEF',
+        gray3: '#EAECEF',
+        gray2: '#8C8497',
+        gray1: '#333D4B',
       },
 
       fontFamily: {
@@ -150,10 +151,10 @@ module.exports = {
           transitionDuration: '150ms',
         },
 
-        '.font-r-14': { fontSize: '14px', lineHeight: '22px', fontWeight: 500 },
-        '.font-r-18': { fontSize: '18px', lineHeight: '26px', fontWeight: 500 },
-        '.font-r-24': { fontSize: '24px', lineHeight: '30px', fontWeight: 500 },
-        '.font-r-28': { fontSize: '28px', lineHeight: '32px', fontWeight: 500 },
+        '.font-m-14': { fontSize: '14px', lineHeight: '22px', fontWeight: 500 },
+        '.font-m-18': { fontSize: '18px', lineHeight: '26px', fontWeight: 500 },
+        '.font-m-24': { fontSize: '24px', lineHeight: '30px', fontWeight: 500 },
+        '.font-m-28': { fontSize: '28px', lineHeight: '32px', fontWeight: 500 },
 
         '.font-b-14': { fontSize: '14px', lineHeight: '22px', fontWeight: 700 },
         '.font-b-18': { fontSize: '18px', lineHeight: '26px', fontWeight: 700 },
