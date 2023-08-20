@@ -4,24 +4,20 @@ import { Gnb } from '~/components/gnb';
 import { List } from '~/components/list';
 import { ConnectPopup } from '~/components/popup-connect';
 import { POPUP_ID } from '~/constants';
-import { data } from '~/data';
 import { usePopup } from '~/hooks/pages/use-popup';
+import { useHooksStore } from '~/states/hook-info';
 import { useWalletStore } from '~/states/wallet-info';
 
 const MainPage = () => {
-  const menus = [
-    { name: 'Hooks', path: '/' },
-    { name: 'Upload Hook', path: '/upload' },
-  ];
-
   const { wallet } = useWalletStore();
+  const { hooks } = useHooksStore();
   const { opened } = usePopup(POPUP_ID.CONNECT);
 
   return (
     <Wrapper>
-      <Gnb menus={menus} />
+      <Gnb />
       <ContentWrapper>
-        {data.map(val => {
+        {hooks.map(val => {
           return <List key={val.id} data={val} connected={!!wallet?.classicAddress} />;
         })}
       </ContentWrapper>
