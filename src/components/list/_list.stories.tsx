@@ -1,6 +1,6 @@
 import tw from 'twin.macro';
 
-import { Hook } from '~/types';
+import { data } from '~/data';
 
 import { List } from '.';
 
@@ -11,17 +11,11 @@ const meta = {
 export default meta;
 
 export const _List = () => {
-  const data: Hook = {
-    title: 'Carbon',
-    description:
-      'the account to send a 1% carbon-offset txn each time another txn is sent from the account.',
-    likes: 123,
-    liked: false,
-  };
   return (
     <Wrapper>
-      <List data={data} connected={false} />
-      <List data={data} connected={true} />
+      {data.map(val => {
+        return <List key={val.id} data={val} connected={false} />;
+      })}
     </Wrapper>
   );
 };

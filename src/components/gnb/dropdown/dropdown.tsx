@@ -18,13 +18,13 @@ export const Dropdown = ({ disconnect, address, connect }: Props) => {
   useOnClickOutside(dropdownRef, () => open(false));
 
   return (
-    <Wrapper opened={opened} ref={dropdownRef}>
+    <Wrapper opened={opened && !!address} ref={dropdownRef}>
       <ButtonLarge
         style={{ width: '194px', backgroundColor: address ? `${COLOR.PURPLE2}` : '' }}
         onClick={address ? () => open(prev => !prev) : () => connect?.()}
         text={address ? truncateAddress(address) : 'Connect Wallet'}
       />
-      {opened && (
+      {opened && address && (
         <OpenedDropdown>
           <Disconnect>
             <IconLogout width={20} height={20} color={COLOR.GARY3} />
@@ -42,7 +42,7 @@ interface WrapperProps {
 
 const Wrapper = styled.div<WrapperProps>(({ opened }) => [
   tw`flex items-center flex-col relative rounded-t-8 w-194`,
-  opened && tw`bg-purple2 `,
+  opened && tw`bg-purple2`,
 ]);
 
 const OpenedDropdown = tw.div`
