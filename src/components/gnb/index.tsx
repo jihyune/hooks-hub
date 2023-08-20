@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import tw from 'twin.macro';
 
-import logo from '~/assets/images/logo.png';
+import favicon from '~/assets/images/favicon.png';
+import logo from '~/assets/images/logo_3.png';
 import { POPUP_ID } from '~/constants';
 import { usePopup } from '~/hooks/pages/use-popup';
 import { useWalletStore } from '~/states/wallet-info';
@@ -28,7 +29,8 @@ export const Gnb = () => {
   return (
     <Wrapper>
       <LogoWrapper onClick={() => navigate('/')}>
-        <LogoImage src={logo} alt="logo" />
+        <LogoImage style={{ width: '80px' }} src={favicon} alt="favicon" />
+        <LogoImage style={{ height: '30px' }} src={logo} alt="logo" />
       </LogoWrapper>
       <MenuWrapper>
         {menus.map(menu => {
@@ -50,11 +52,11 @@ const Wrapper = tw.div`
 `;
 
 const LogoWrapper = tw.div`
-  flex items-end gap-12 clickable
+  flex items-center gap-12 clickable
 `;
 
 const LogoImage = tw.img`
-  w-210
+  object-cover
 `;
 
 const MenuWrapper = tw.div`flex gap-20 items-center`;
