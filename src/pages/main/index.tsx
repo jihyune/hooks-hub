@@ -1,6 +1,6 @@
 import tw from 'twin.macro';
 
-import { ButtonSmall } from '~/components/buttons/small';
+import { ButtonSmall } from '~/components/buttons/small/button-small';
 
 const MainPage = () => {
   return (
@@ -11,8 +11,5 @@ const MainPage = () => {
 };
 
 const Wrapper = tw.div``;
-const Text = tw.div`
-  font-r-14
-`;
 
 export default MainPage;
