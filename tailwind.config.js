@@ -30,15 +30,15 @@ module.exports = {
       colors: {
         ...defaultTheme.colors,
 
-        // TODO: color setting
-        black: '#1a1a1a',
+        black: '#000000',
         white: '#ffffff',
 
-        gray5: '#262a2f',
-        gray4: '#424851',
-        gray3: '#6d7684',
-        gray2: '#adb3be',
-        gray1: '#e5e7ec',
+        purple3:'#847794'
+        purple2:'#6F5A7E'
+        purple1:'#4A2961'
+
+        gray2: '#333D4B',
+        gray1: '#EAECEF',
       },
 
       fontFamily: {
@@ -150,18 +150,15 @@ module.exports = {
           transitionDuration: '150ms',
         },
 
-        // TODO: font setting
-        '.font-r-12': { fontSize: '12px', lineHeight: '20px', fontWeight: 400 },
-        '.font-r-14': { fontSize: '14px', lineHeight: '22px', fontWeight: 400 },
-        '.font-r-16': { fontSize: '16px', lineHeight: '24px', fontWeight: 400 },
-        '.font-r-24': { fontSize: '24px', lineHeight: '32px', fontWeight: 400 },
-        '.font-r-28': { fontSize: '28px', lineHeight: '38px', fontWeight: 400 },
+        '.font-r-14': { fontSize: '14px', lineHeight: '22px', fontWeight: 500 },
+        '.font-r-18': { fontSize: '18px', lineHeight: '26px', fontWeight: 500 },
+        '.font-r-24': { fontSize: '24px', lineHeight: '30px', fontWeight: 500 },
+        '.font-r-28': { fontSize: '28px', lineHeight: '32px', fontWeight: 500 },
 
-        '.font-sb-12': { fontSize: '12px', lineHeight: '20px', fontWeight: 600 },
-        '.font-sb-14': { fontSize: '14px', lineHeight: '22px', fontWeight: 600 },
-        '.font-sb-18': { fontSize: '18px', lineHeight: '26px', fontWeight: 600 },
-        '.font-sb-20': { fontSize: '20px', lineHeight: '28px', fontWeight: 600 },
-        '.font-sb-28': { fontSize: '28px', lineHeight: '38px', fontWeight: 600 },
+        '.font-b-14': { fontSize: '14px', lineHeight: '22px', fontWeight: 700 },
+        '.font-b-18': { fontSize: '18px', lineHeight: '26px', fontWeight: 700 },
+        '.font-b-24': { fontSize: '20px', lineHeight: '30px', fontWeight: 700 },
+        '.font-b-28': { fontSize: '28px', lineHeight: '32px', fontWeight: 700 },
       });
 
       addUtilities({
