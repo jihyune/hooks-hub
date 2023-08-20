@@ -3,10 +3,9 @@ import tw, { css, styled } from 'twin.macro';
 import { useOnClickOutside } from 'usehooks-ts';
 
 import { COLOR } from '~/assets/colors';
+import { ButtonLarge } from '~/components/buttons/button-large';
+import { IconLogout } from '~/components/icons';
 import { truncateAddress } from '~/utils/string';
-
-import { ButtonLarge } from '../buttons/button-large';
-import { IconLogout } from '../icons';
 
 interface Props {
   connect?: () => void;
