@@ -58,7 +58,7 @@ const UploadPage = () => {
               ref={hiddenFileInput}
               onChange={handleChange}
               style={{ display: 'none' }}
-              accept=".c"
+              accept=".wasm"
             />
             {file && <Text>{file.name}</Text>}
           </FileWrapper>
