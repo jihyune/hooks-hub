@@ -1,11 +1,16 @@
 import tw from 'twin.macro';
 
-import { ButtonSmall } from '~/components/buttons/small/button-small';
+import { Gnb } from '~/components/gnb';
 
 const MainPage = () => {
+  const menus = [
+    { name: 'Hooks', path: '/' },
+    { name: 'Upload Hook', path: '/upload' },
+  ];
+
   return (
     <Wrapper>
-      <ButtonSmall text={'text here'} />
+      <Gnb menus={menus} />
     </Wrapper>
   );
 };
