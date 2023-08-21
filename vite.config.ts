@@ -20,7 +20,6 @@ export default defineConfig({
       { find: 'stream', replacement: 'stream-browserify' },
       { find: 'http', replacement: 'stream-http' },
       { find: 'https', replacement: 'https-browserify' },
-      { find: 'ws', replacement: 'xrpl/dist/npm/client/WSWrapper' },
     ],
   },
 

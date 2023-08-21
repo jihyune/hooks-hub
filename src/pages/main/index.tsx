@@ -18,7 +18,7 @@ const MainPage = () => {
       <Gnb />
       <ContentWrapper>
         {hooks.map(val => {
-          return <List key={val.id} data={val} connected={!!wallet?.classicAddress} />;
+          return <List key={val.id} data={val} connected={!!wallet?.address} />;
         })}
       </ContentWrapper>
       {opened && <ConnectPopup />}
@@ -29,5 +29,5 @@ export default MainPage;
 
 const Wrapper = tw.div`flex flex-col relative px-30`;
 const ContentWrapper = tw.div`
-  flex flex-col pt-200 gap-20
+  flex flex-col pt-200 gap-20 pb-150
 `;

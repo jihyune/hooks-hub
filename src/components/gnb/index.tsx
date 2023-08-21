@@ -17,7 +17,7 @@ export const Gnb = () => {
 
   const menus: Menu[] = [
     { name: 'Hooks', path: '/', isVisible: true },
-    { name: 'Upload Hook', path: '/upload', isVisible: !!wallet?.classicAddress },
+    { name: 'Upload Hook', path: '/upload', isVisible: !!wallet?.address },
   ];
 
   const disconnect = () => {
@@ -41,14 +41,14 @@ export const Gnb = () => {
             </MenuButton>
           );
         })}
-        <Dropdown address={wallet?.classicAddress} disconnect={disconnect} connect={open} />
+        <Dropdown address={wallet?.address} disconnect={disconnect} connect={open} />
       </MenuWrapper>
     </Wrapper>
   );
 };
 
 const Wrapper = tw.div`
-  fixed top-0 left-0 w-full h-115 flex justify-between items-center z-10 px-20
+  fixed top-0 left-0 w-full h-115 flex justify-between items-center z-10 px-20 bg-white
 `;
 
 const LogoWrapper = tw.div`

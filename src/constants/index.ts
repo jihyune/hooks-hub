@@ -75,4 +75,4 @@ export const FORMAT_NUMBER_THRESHOLD = 10000000;
 export const POPUP_ID = {
   CONNECT: 'connect',
 };
-export const NET = 'wss://s.altnet.rippletest.net:51233';
+export const NET = 'wss://hooks-testnet-v3.xrpl-labs.com/';

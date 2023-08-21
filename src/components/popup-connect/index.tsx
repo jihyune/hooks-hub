@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import tw from 'twin.macro';
 import { useOnClickOutside } from 'usehooks-ts';
-import { Wallet } from 'xrpl';
+import { derive } from 'xrpl-accountlib';
 
 import { COLOR } from '~/assets/colors';
 import { POPUP_ID } from '~/constants';
@@ -25,8 +25,9 @@ export const ConnectPopup = () => {
   const connectWallet = async () => {
     if (!seed) return;
     setConnectingLoading(true);
-    const wallet = Wallet.fromSeed(seed);
+    const wallet = derive.familySeed(seed);
     setWallet(wallet);
+    console.log(wallet);
     close();
   };
 

@@ -45,8 +45,7 @@ const Wrapper = styled.button<LoadingProps>(({ isLoading }) => [
     hover:(bg-purple2)
     disabled:(bg-gray3 non-clickable hover:(bg-gray3) text-gray2)
   `,
-  isLoading &&
-    tw`text-transparent non-clickable bg-purple2 disabled:(bg-purple2 hover:(bg-purple2))`,
+  isLoading && tw`text-transparent non-clickable bg-white disabled:(bg-white hover:(bg-white))`,
 ]);
 
 const TextWrapper = styled.div<LoadingProps>(({ isLoading }) => [isLoading && tw`opacity-0`]);

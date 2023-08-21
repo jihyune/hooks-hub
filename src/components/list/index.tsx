@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import tw from 'twin.macro';
+import { signAndSubmit, utils } from 'xrpl-accountlib';
 
 import { COLOR } from '~/assets/colors';
+import { NET } from '~/constants';
+import { useWalletStore } from '~/states/wallet-info';
 import { Hook } from '~/types';
 
 import { ButtonSmall } from '../buttons/button-small';
@@ -15,6 +18,40 @@ interface Props {
 export const List = ({ data, connected }: Props) => {
   const [liked, like] = useState(data.liked);
   const [likes, setLikes] = useState(data.likes);
+  const [isLoading, setIsLoading] = useState(false);
+  const [success, succeed] = useState(false);
+
+  const { wallet } = useWalletStore();
+
+  const applyHook = async () => {
+    if (!wallet) return;
+    setIsLoading(true);
+
+    const networkInfo = await utils.txNetworkAndAccountValues(NET, wallet);
+    console.log(networkInfo);
+
+    const tx = {
+      TransactionType: 'SetHook',
+      Hooks: [
+        {
+          Hook: {
+            CreateCode: data.file, // in prod, encoded data from BE should be here :P
+            Flags: 1,
+            HookApiVersion: 0,
+            HookNamespace: 'hookshub' + data.id.toString(),
+            HookOn: 'F'.repeat(58) + 'BFFFFE',
+          },
+        },
+      ],
+
+      ...networkInfo.txValues,
+      Fee: '4000000',
+    };
+
+    const submitted = await signAndSubmit(tx, NET, wallet);
+
+    console.log(submitted);
+  };
 
   const handleLike = () => {
     if (!connected) return;
@@ -22,21 +59,32 @@ export const List = ({ data, connected }: Props) => {
     like(prev => !prev);
   };
 
-  // TODO : connect apply hook
-  const applyHook = () => console.log('apply');
+  const handleClick = async () => {
+    await applyHook();
+    succeed(true);
+  };
+
+  useEffect(() => {
+    if (success) setIsLoading(false);
+  }, [success]);
 
   return (
     <Wrapper>
       <TitleWrapper>
         <Title>{data.title}</Title>
         <InfoWrapper>
+          <Info>{data.price && <Text>{data.price} XRP</Text>}</Info>
           <Info>
             <IconGood color={liked ? COLOR.PURPLE1 : COLOR.PURPLE2} onClick={handleLike} />
             <Text>{likes}</Text>
           </Info>
           {connected && (
             <ButtonWrapper>
-              <ButtonSmall text="Apply" onClick={applyHook} />
+              <ButtonSmall
+                text={data.price ? 'Buy' : 'Apply'}
+                onClick={handleClick}
+                isLoading={isLoading}
+              />
             </ButtonWrapper>
           )}
         </InfoWrapper>
