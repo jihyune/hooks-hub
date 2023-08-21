@@ -10,9 +10,10 @@ import { IconGood } from '../icons';
 interface Props {
   data: Hook;
   connected: boolean;
+  onClick: () => void;
 }
 
-export const List = ({ data, connected }: Props) => {
+export const List = ({ data, connected, onClick }: Props) => {
   const [liked, like] = useState(data.liked);
   const [likes, setLikes] = useState(data.likes);
 
@@ -21,9 +22,6 @@ export const List = ({ data, connected }: Props) => {
     liked ? setLikes(prev => prev - 1) : setLikes(prev => prev + 1);
     like(prev => !prev);
   };
-
-  // TODO : connect apply hook
-  const applyHook = () => console.log('apply');
 
   return (
     <Wrapper>
@@ -36,7 +34,7 @@ export const List = ({ data, connected }: Props) => {
           </Info>
           {connected && (
             <ButtonWrapper>
-              <ButtonSmall text="Apply" onClick={applyHook} />
+              <ButtonSmall text="Apply" onClick={onClick} />
             </ButtonWrapper>
           )}
         </InfoWrapper>

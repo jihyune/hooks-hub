@@ -17,7 +17,7 @@ export const Gnb = () => {
 
   const menus: Menu[] = [
     { name: 'Hooks', path: '/', isVisible: true },
-    { name: 'Upload Hook', path: '/upload', isVisible: !!wallet?.classicAddress },
+    { name: 'Upload Hook', path: '/upload', isVisible: !!wallet?.address },
   ];
 
   const disconnect = () => {
@@ -41,7 +41,7 @@ export const Gnb = () => {
             </MenuButton>
           );
         })}
-        <Dropdown address={wallet?.classicAddress} disconnect={disconnect} connect={open} />
+        <Dropdown address={wallet?.address} disconnect={disconnect} connect={open} />
       </MenuWrapper>
     </Wrapper>
   );

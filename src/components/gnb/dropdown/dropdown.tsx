@@ -10,7 +10,7 @@ import { truncateAddress } from '~/utils/string';
 interface Props {
   connect?: () => void;
   disconnect?: () => void;
-  address?: string;
+  address?: string | null;
 }
 export const Dropdown = ({ disconnect, address, connect }: Props) => {
   const [opened, open] = useState(false);
