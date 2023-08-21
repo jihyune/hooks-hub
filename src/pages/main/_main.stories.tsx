@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Web3Provider from '~/hocs/hoc-web3-provider';
-
 import MainPage from '.';
 
 const meta = {
@@ -15,10 +13,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const _MainPage: Story = {
-  render: () => (
-    <Web3Provider>
-      <MainPage />
-    </Web3Provider>
-  ),
+  render: () => <MainPage />,
   args: {},
 };
