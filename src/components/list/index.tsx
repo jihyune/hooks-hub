@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import tw from 'twin.macro';
 
 import { COLOR } from '~/assets/colors';
@@ -10,18 +10,34 @@ import { IconGood } from '../icons';
 interface Props {
   data: Hook;
   connected: boolean;
-  onClick: () => void;
+  onClick: () => Promise<void>;
 }
 
 export const List = ({ data, connected, onClick }: Props) => {
   const [liked, like] = useState(data.liked);
   const [likes, setLikes] = useState(data.likes);
+  const [isLoading, setIsLoading] = useState(false);
+  const [success, succeed] = useState(false);
 
   const handleLike = () => {
     if (!connected) return;
     liked ? setLikes(prev => prev - 1) : setLikes(prev => prev + 1);
     like(prev => !prev);
   };
+
+  const handleLoading = () => {
+    setIsLoading(true);
+  };
+
+  const handleClick = async () => {
+    handleLoading();
+    await onClick();
+    succeed(true);
+  };
+
+  useEffect(() => {
+    if (success) setIsLoading(false);
+  }, [success]);
 
   return (
     <Wrapper>
@@ -35,7 +51,11 @@ export const List = ({ data, connected, onClick }: Props) => {
           </Info>
           {connected && (
             <ButtonWrapper>
-              <ButtonSmall text={data.price ? 'Buy' : 'Apply'} onClick={onClick} />
+              <ButtonSmall
+                text={data.price ? 'Buy' : 'Apply'}
+                onClick={handleClick}
+                isLoading={isLoading}
+              />
             </ButtonWrapper>
           )}
         </InfoWrapper>
