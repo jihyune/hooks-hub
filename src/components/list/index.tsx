@@ -28,13 +28,14 @@ export const List = ({ data, connected, onClick }: Props) => {
       <TitleWrapper>
         <Title>{data.title}</Title>
         <InfoWrapper>
+          <Info>{data.price && <Text>{data.price} XRP</Text>}</Info>
           <Info>
             <IconGood color={liked ? COLOR.PURPLE1 : COLOR.PURPLE2} onClick={handleLike} />
             <Text>{likes}</Text>
           </Info>
           {connected && (
             <ButtonWrapper>
-              <ButtonSmall text="Apply" onClick={onClick} />
+              <ButtonSmall text={data.price ? 'Buy' : 'Apply'} onClick={onClick} />
             </ButtonWrapper>
           )}
         </InfoWrapper>

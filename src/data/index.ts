@@ -24,5 +24,6 @@ export const data: Hook[] = [
       'Installing this hook causes transactions from blacklisted accounts to be rejected Installing is a two step process, first create the blacklist storage account and install the blacklist itself:',
     likes: 0,
     liked: false,
+    price: 10,
   },
 ];

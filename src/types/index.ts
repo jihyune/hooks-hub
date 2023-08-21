@@ -14,6 +14,7 @@ export interface Hook {
 
   likes: number;
   liked?: boolean;
+  price?: number;
 }
 
 export interface CreateHook {
