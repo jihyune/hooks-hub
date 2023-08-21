@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import tw from 'twin.macro';
+import { signAndSubmit, utils } from 'xrpl-accountlib';
 
 import { COLOR } from '~/assets/colors';
+import { NET } from '~/constants';
+import { useWalletStore } from '~/states/wallet-info';
 import { Hook } from '~/types';
 
 import { ButtonSmall } from '../buttons/button-small';
@@ -10,14 +13,45 @@ import { IconGood } from '../icons';
 interface Props {
   data: Hook;
   connected: boolean;
-  onClick: () => Promise<void>;
 }
 
-export const List = ({ data, connected, onClick }: Props) => {
+export const List = ({ data, connected }: Props) => {
   const [liked, like] = useState(data.liked);
   const [likes, setLikes] = useState(data.likes);
   const [isLoading, setIsLoading] = useState(false);
   const [success, succeed] = useState(false);
+
+  const { wallet } = useWalletStore();
+
+  const applyHook = async () => {
+    if (!wallet) return;
+    setIsLoading(true);
+
+    const networkInfo = await utils.txNetworkAndAccountValues(NET, wallet);
+    console.log(networkInfo);
+
+    const tx = {
+      TransactionType: 'SetHook',
+      Hooks: [
+        {
+          Hook: {
+            CreateCode: data.file, // in prod, encoded data from BE should be here :P
+            Flags: 1,
+            HookApiVersion: 0,
+            HookNamespace: 'hookshub' + data.id.toString(),
+            HookOn: 'F'.repeat(58) + 'BFFFFE',
+          },
+        },
+      ],
+
+      ...networkInfo.txValues,
+      Fee: '4000000',
+    };
+
+    const submitted = await signAndSubmit(tx, NET, wallet);
+
+    console.log(submitted);
+  };
 
   const handleLike = () => {
     if (!connected) return;
@@ -25,13 +59,8 @@ export const List = ({ data, connected, onClick }: Props) => {
     like(prev => !prev);
   };
 
-  const handleLoading = () => {
-    setIsLoading(true);
-  };
-
   const handleClick = async () => {
-    handleLoading();
-    await onClick();
+    await applyHook();
     succeed(true);
   };
 

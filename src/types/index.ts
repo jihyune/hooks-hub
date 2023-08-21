@@ -10,7 +10,7 @@ export interface Hook {
   id: number;
   title: string;
   description: string;
-  file?: File;
+  file: string;
 
   likes: number;
   liked?: boolean;
