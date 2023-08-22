@@ -1,3 +1,4 @@
+import { createHash } from 'crypto';
 import { useEffect, useState } from 'react';
 import tw from 'twin.macro';
 import { signAndSubmit, utils } from 'xrpl-accountlib';
@@ -30,6 +31,10 @@ export const List = ({ data, connected }: Props) => {
     const networkInfo = await utils.txNetworkAndAccountValues(NET, wallet);
     console.log(networkInfo);
 
+    const nameSpace = createHash('sha256')
+      .update(data.title + data.id.toString(), 'utf-8')
+      .digest('hex');
+
     const tx = {
       TransactionType: 'SetHook',
       Hooks: [
@@ -38,7 +43,7 @@ export const List = ({ data, connected }: Props) => {
             CreateCode: data.file, // in prod, encoded data from BE should be here :P
             Flags: 1,
             HookApiVersion: 0,
-            HookNamespace: 'hookshub' + data.id.toString(),
+            HookNamespace: nameSpace,
             HookOn: 'F'.repeat(58) + 'BFFFFE',
           },
         },
